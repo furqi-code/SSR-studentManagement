@@ -17,6 +17,7 @@ const { adminPrefill } = require('./Router/adminPrefill');
 const softDelete = require('./Router/admin-softDelete');
 const resetPassword = require('./Router/resetPassword') ;
 const clear_All = require('./Router/clear-students') ;
+const forgetPassword = require("./Router/forgetPassword") ;
 
 
 // Middlewares
@@ -44,6 +45,8 @@ app.use('/adminPrefill', adminPrefill) ;
 app.use('/resetPassword', resetPassword) ;
 app.use('/softDelete', softDelete) ;
 app.use('/clearStudents', clear_All) ;
+// student
+app.use("/forgotPassword", forgetPassword);
 
 
 
