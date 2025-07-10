@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management</title>
+    <%- include("shared/links"); %>
+    <link rel="stylesheet" href="">
+    <style>
+        body{
+            background-color: lightslategray ;
+        }
+        .navbar{
+            background-color: black;
+        }
+        nav{
+            height: 100px;
+            border-radius: 17px
+        }
+        .card{
+            border-radius: 12px;
+        }
+        .modal-body{
+            background-color: lightblue;
+        }
+        input{
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <%- include("shared/navbar") ; %>
+
+    <!-- Admin LOGIN MODAL -->
+    <div class="modal fade" id="admin-loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 shadow-sm">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <form onsubmit="adminLogin(event)">
+                        <h1 class="mb-4 fw-semibold text-center" style="font-size: 24px;">Welcome Admin</h1>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-3" name="admin_username" placeholder="username" required />
+                            <label>Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" name="admin_pass" placeholder="Password" required />
+                            <label>Password</label>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center  mb-3">
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="remember-me" id="rememberMe" />
+                                <label class="form-check-label" for="rememberMe"> Remember me </label>
+                            </div>
+                            <!-- <input class="btn btn-link" type="button" value="Forgot Password?" data-bs-toggle="modal" data-bs-target="#forgotPassModal" placeholder="Forgot Password" /> -->
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2" style="font-size: 16px;">
+                            Sign In
+                        </button>
+                        <div class="text-success text-center mt-3" id="signinSuccessMessage0"></div>
+                        <div class="text-danger text-center mt-1" id="signinErrorMessage0"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student LOGIN MODAL -->
+    <div class="modal fade" id="stud-loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 shadow-sm">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <form onsubmit="studlogin(event)">
+                        <h1 class="mb-4 fw-semibold text-center" style="font-size: 24px;">Welcome Student</h1>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-3" name="stud_username" placeholder="username" required />
+                            <label>Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" name="stud_pass" placeholder="Password" required />
+                            <label>Password</label>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center  mb-3">
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="remember-me" id="rememberMe" />
+                                <label class="form-check-label" for="rememberMe"> Remember me </label>
+                            </div>
+                            <input class="btn btn-link" type="button" value="Forgot Password?" data-bs-toggle="modal" data-bs-target="#forgotPassModal" placeholder="Forgot Password" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2" style="font-size: 16px;">
+                            Sign In
+                        </button>
+                        <div class="text-success text-center mt-3" id="signinSuccessMessage1"></div>
+                        <div class="text-danger text-center mt-1" id="signinErrorMessage1"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forget student Password Modal -->
+      <div class="modal fade" id="forgotPassModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="forgotPassModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 shadow-sm">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <form onsubmit="forgotPass(event)">
+                        <h1 class="mb-4 fw-semibold text-center" style="font-size: 24px;">Forgot Your Password ?</h1>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-3" name="email" placeholder="email" required />
+                            <label>Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" name="newPassword" placeholder="New Password" required />
+                            <label>New Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" name="confirmPassword" placeholder="Confirm Password" required />
+                            <label>Re-enter Password</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2" style="font-size: 16px;">
+                            Change Password
+                        </button>
+                        <div class="text-success text-center mt-1" id="resetPassMessage"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast hide" id="forgotToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+            <img src="/images/user.png" class="rounded me-2" alt="..." width="35" height="35">
+            <strong class="me-auto">Student Management System</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Your password has been changed successfully
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="/js/home.js"></script>
+</body>
+</html>
