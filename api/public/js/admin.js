@@ -113,6 +113,51 @@ function updateStudent(event)
     })
 }
 
+function resetPassword(id)
+{
+    axios({
+        method: 'PATCH',
+        url: 'http://localhost:11000/resetPassword',
+        params : {
+            id
+        }
+    }).then(function(){
+        resetToast.show() ;
+        setTimeout(function(){
+            resetToast.hide() ;
+            location.reload() ;
+        }, 2000)
+    })
+}
+
+function removestudent(username)
+{
+    axios({
+        method : "POST",
+        url : "http://localhost:11000/softDelete",
+        params : {
+            username
+        }
+    })
+    .then(function(res){
+        deleteToast.show() ;
+        setTimeout(function(){
+            location.reload() ;
+        }, 2000) ;
+        // we dont have student_id in the card isliye wo use nhi kiya find krne k liye and after reload <small> message gets dissappear so i used if() in admin.ejs
+        // $(".card-body").each(function(){
+        //     let text = $(this).find(".username").text();    // "Username : ice"
+        //     let deletedUsername = text.replace("Username : ", "");  // "ice"
+        //     if(username === deletedUsername){
+        //         $(this).find(".studentDeleted").text("this student is soft deleted") ;
+        //         deleteToast.show() ;
+        //         // $("#deleteToast").toast("show");
+        //         return ;
+        //     }
+        // })
+    })
+}
+
 function deleteAll()
 {
     axios({
