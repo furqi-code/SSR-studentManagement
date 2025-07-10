@@ -12,6 +12,8 @@ const { adminRouter } = require('./Router/adminPage');
 const { adminSignin } = require('./Router/admin-signin');
 const { admin_LogoutRouter } = require('./Router/admin-logout');
 const { admission } = require('./Router/admission');
+const { studentUpdated } = require('./Router/admin-editStudnt');
+const { adminPrefill } = require('./Router/adminPrefill');
 const clear_All = require('./Router/clear-students') ;
 
 
@@ -35,6 +37,8 @@ app.use('/admin-signin', adminSignin) ;
 app.use('/adminLogout', admin_LogoutRouter) ;
 app.use('/adminPage', adminRouter) ;
 app.use('/addstudent', admission) ;
+app.use('/editstudent', studentUpdated) ;
+app.use('/adminPrefill', adminPrefill) ;
 app.use('/clearStudents', clear_All) ;
 
 
