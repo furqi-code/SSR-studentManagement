@@ -18,6 +18,9 @@ const softDelete = require('./Router/admin-softDelete');
 const resetPassword = require('./Router/resetPassword') ;
 const clear_All = require('./Router/clear-students') ;
 const forgetPassword = require("./Router/forgetPassword") ;
+const { studentRouter } = require('./Router/studntPage') ;
+const { studntSignin } = require('./Router/studnt-signin');
+const { student_LogoutRouter } = require('./Router/student-logout');
 
 
 // Middlewares
@@ -47,6 +50,9 @@ app.use('/softDelete', softDelete) ;
 app.use('/clearStudents', clear_All) ;
 // student
 app.use("/forgotPassword", forgetPassword);
+app.use('/studentPage', studentRouter) ;
+app.use('/student-signin', studntSignin) ;
+app.use('/studntLogout', student_LogoutRouter) ;
 
 
 
