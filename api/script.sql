@@ -30,5 +30,17 @@ create table student_details (
 select * from student_details ;
 drop table student_details ;
 
+-- not needed now
+create table student_login(
+    student_id int,
+    username VARCHAR(255),
+    login_count int,
+    foreign key (student_id) references student_details(student_id) ON DELETE CASCADE,
+    foreign key (username) references student_details(username) ON DELETE CASCADE
+);
+
+select * from student_login ;
+drop table student_login ;
+
 
 drop database studntManagement ;

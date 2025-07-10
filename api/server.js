@@ -23,6 +23,7 @@ const { studntSignin } = require('./Router/studnt-signin');
 const { student_LogoutRouter } = require('./Router/student-logout');
 const { updateMyself } = require('./Router/studnt-editStudnt');
 const { studentPrefill } = require('./Router/studentPrefill');
+// const { login_count } = require('./Router/login-count');
 
 
 // Middlewares
@@ -57,6 +58,7 @@ app.use('/student-signin', studntSignin) ;
 app.use('/studntLogout', student_LogoutRouter) ;
 app.use('/editMyself', updateMyself) ;
 app.use('/studentPrefill', studentPrefill) ;
+// app.use('/signin-count', login_count) ;
 
 
 app.listen(PORT, function () {
