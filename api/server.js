@@ -21,6 +21,8 @@ const forgetPassword = require("./Router/forgetPassword") ;
 const { studentRouter } = require('./Router/studntPage') ;
 const { studntSignin } = require('./Router/studnt-signin');
 const { student_LogoutRouter } = require('./Router/student-logout');
+const { updateMyself } = require('./Router/studnt-editStudnt');
+const { studentPrefill } = require('./Router/studentPrefill');
 
 
 // Middlewares
@@ -53,7 +55,8 @@ app.use("/forgotPassword", forgetPassword);
 app.use('/studentPage', studentRouter) ;
 app.use('/student-signin', studntSignin) ;
 app.use('/studntLogout', student_LogoutRouter) ;
-
+app.use('/editMyself', updateMyself) ;
+app.use('/studentPrefill', studentPrefill) ;
 
 
 app.listen(PORT, function () {

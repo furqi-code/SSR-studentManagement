@@ -52,7 +52,8 @@ function editstudent(id){
         params : {
             id
         }
-    }).then(function(res){
+    })
+    .then(function(res){
         if(res.data.length > 0)
         {
             const student = res.data[0] ;
