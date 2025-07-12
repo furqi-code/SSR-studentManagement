@@ -9,16 +9,16 @@ const { executeQuery } = require('../mySqldb/Query') ;
 Router.post('/', async function(req,res){
     try{
         const {username, password} = req.body ;
-        let existing_admin = await executeQuery(`select * from admin where Username = ?`, [username]) ;
+        let existing_admin = await executeQuery(`select * from student_details where Username = ?`, [username]) ;
         if(existing_admin.length > 0)
         {
             let dbAdmin = existing_admin[0] ;
-            let admin_id = dbAdmin.admin_id ;
-            let check_pass = await executeQuery(`select * from admin where Password = ?`, [password]) ;
+            let admin_id = dbAdmin.student_id ;
+            let check_pass = await executeQuery(`select * from student_details where Password = ?`, [password]) ;
             if(check_pass.length > 0){
                 const token = jwt.sign(
                     {
-                        user_type : "Admin",
+                        is_admin : true,
                         user_id : admin_id
                     },
                     SECRET

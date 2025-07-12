@@ -1,8 +1,9 @@
 const express = require('express') ;
 const Router = express.Router() ;
 const { executeQuery } = require('../mySqldb/Query') ;
+const { Auth_admin } = require('../middleware') ;
 
-Router.post('/', async function(req,res){
+Router.post('/', Auth_admin, async function(req,res){
     try{
         const username = req.query.username ;
         let existing_student = await executeQuery(`select * from student_details where username = ?`, [username]) ;

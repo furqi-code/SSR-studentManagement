@@ -3,9 +3,10 @@ const Router = express.Router() ;
 const bcrypt = require('bcrypt') ;
 const { SALTROUNDS } = require('../constants') ;
 const { executeQuery } = require('../mySqldb/Query') ;
+const { Auth_admin } = require('../middleware') ;
 
 
-Router.post('/', async function(req,res){
+Router.post('/', Auth_admin, async function(req,res){
     try{
         const { name, fatherName, email, address, phoneNumber, dob, grade, username, gender} = req.body ;
         let passDob = new Date(dob).toISOString().split('T')[0].replace('-','').replace('-','') ;

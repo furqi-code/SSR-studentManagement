@@ -24,7 +24,7 @@ Router.post('/', async function(req,res){
             {
                 const token = jwt.sign(
                     {
-                        user_type : "Student",
+                        is_admin : false,
                         user_id : student_id
                     },
                     SECRET
