@@ -19,11 +19,11 @@ Router.patch("/", async function(req,res){
             let dbUser = existing_student[0] ;
             let username = dbUser.username ;
             let student_id = dbUser.student_id ;
-            let update_pass = await executeQuery(`update student_details set login_count = ?, password = ? where student_id = ?`,
-                [1, bcrypt.hashSync(newPassword, SALTROUNDS), student_id]) ;
+            let update_pass = await executeQuery(`update student_details set is_active = ?, password = ? where student_id = ?`,
+                [true, bcrypt.hashSync(newPassword, SALTROUNDS), student_id]) ;
             console.log(update_pass) ;
-            // Update login_count to 1 in student_login
-            // await executeQuery(`update student_login set login_count = ? where Username = ?`, [1, username]) ;
+            // Update is_active to 1 or true in student_login table
+            // await executeQuery(`update student_login set is_active = ? where Username = ?`, [1, username]) ;
             res.status(200).send({
                 message : "Reset Password successfully"
             })

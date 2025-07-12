@@ -16,12 +16,14 @@ create table student_details (
     name VARCHAR(100),
     fatherName VARCHAR(100),
     email VARCHAR(100),
+    address VARCHAR(100),
     contact VARCHAR(20),
+    DOB DATE,
     grade VARCHAR(20),
     username VARCHAR(255) UNIQUE,
     password VARCHAR(100),
     gender enum('M','F','Male','Female'),
-    login_count int,
+    is_active BOOLEAN,
     created_at timestamp,
     updated_at timestamp,
     deleted_at timestamp
@@ -30,11 +32,12 @@ create table student_details (
 select * from student_details ;
 drop table student_details ;
 
+
 -- not needed now
 create table student_login(
     student_id int,
     username VARCHAR(255),
-    login_count int,
+    is_active int,
     foreign key (student_id) references student_details(student_id) ON DELETE CASCADE,
     foreign key (username) references student_details(username) ON DELETE CASCADE
 );

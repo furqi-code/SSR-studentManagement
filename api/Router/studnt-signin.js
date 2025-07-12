@@ -14,8 +14,8 @@ Router.post('/', async function(req,res){
             let dbUser = existing_student[0] ;
             let hashPwrd = dbUser.password ;
             let student_id = dbUser.student_id ;
-            let login_count = dbUser.login_count ;
-            if(login_count === 0){
+            let is_active = dbUser.is_active ;
+            if(is_active === 0 || is_active === false){
                 throw{
                     message : "change your default password before logging in" 
                 }
