@@ -15,6 +15,7 @@ Router.post('/', async function(req,res){
             let hashPwrd = dbUser.password ;
             let student_id = dbUser.student_id ;
             let is_active = dbUser.is_active ;
+            // let is_admin = dbUser.is_admin ;
             if(is_active === 0 || is_active === false){
                 throw{
                     message : "change your default password before logging in" 
@@ -22,6 +23,7 @@ Router.post('/', async function(req,res){
             }
             if(bcrypt.compareSync(password,hashPwrd))
             {
+                // await executeQuery(`update student_details set is_admin=?`, [false]) ;
                 const token = jwt.sign(
                     {
                         is_admin : false,

@@ -14,8 +14,10 @@ Router.post('/', async function(req,res){
         {
             let dbAdmin = existing_admin[0] ;
             let admin_id = dbAdmin.student_id ;
+            // let is_admin = dbAdmin.is_admin ;
             let check_pass = await executeQuery(`select * from student_details where Password = ?`, [password]) ;
             if(check_pass.length > 0){
+                // await executeQuery(`update student_details set is_admin=?`, [true]) ;
                 const token = jwt.sign(
                     {
                         is_admin : true,

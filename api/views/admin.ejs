@@ -17,15 +17,116 @@
             height: 100px;
             border-radius: 17px
         }
-        .card{
-            border-radius: 12px;
-        }
         .modal-body{
             background-color: lightblue;
         }
         input{
             border-radius: 5px;
         }
+        
+
+ .flex {
+     -webkit-box-flex: 1;
+     -ms-flex: 1 1 auto;
+     flex: 1 1 auto
+ }
+
+ @media (max-width:991.98px) {
+     .padding {
+         padding: 1.5rem
+     }
+ }
+
+ @media (max-width:767.98px) {
+     .padding {
+         padding: 1rem
+     }
+ }
+
+ .padding {
+     padding: 5rem
+ }
+
+ .card {
+     box-shadow: none;
+     -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+     -ms-box-shadow: none
+ }
+
+ .pl-3,
+ .px-3 {
+     padding-left: 1rem !important
+ }
+
+ .card {
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     min-width: 0;
+     word-wrap: break-word;
+     background-color: #fff;
+     background-clip: border-box;
+     border: 1px solid #d2d2dc;
+     border-radius: 0
+ }
+ 
+ .card .card-title {
+    color: #000000;
+    margin-bottom: 0.625rem;
+    text-transform: capitalize;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.card .card-description {
+    margin-bottom: .875rem;
+    font-weight: 400;
+    color: #76838f;
+}
+
+p {
+    font-size: 0.875rem;
+    margin-bottom: .5rem;
+    line-height: 1.5rem;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table, .jsgrid .jsgrid-table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table thead th, .jsgrid .jsgrid-table thead th {
+    border-top: 0;
+    border-bottom-width: 1px;
+    font-weight: 500;
+    font-size: .875rem;
+    text-transform: uppercase;
+}
+
+.table td, .jsgrid .jsgrid-table td {
+    font-size: 0.875rem;
+    padding: .875rem 0.9375rem;
+}
+
+.badge {
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 1;
+    padding: .375rem .5625rem;
+    font-weight: normal;
+}
+ 
     </style>
 </head>
 <body>
@@ -251,52 +352,78 @@
     </div>
 
 
-    <!-- Students/Cards -->
-    <div class="container">
-        <div class="row" id="list">
-            <% if(arr.length === 0){ %>
-                <p class="text-white text-center mt-5">start taking admissions<br>Zero students</p>
-            <% }else{ %>
-                <% arr.forEach(function(student){ %>
-                    <% if(!(student.username === "admin" && student.password === "admin123")) { %>  
-                        <div class="col-lg-4">
-                            <div class="card mt-5" style="width: 18rem;">
-                                <div class="card-body">
-                                    <div class="d-flex mb-2 justify-content-center align-items-center">
-                                        <img src="/images/working.png" alt="" class="image-fluid object-cover" height="100px", width="100px">
-                                    </div>
-                                    <h5 class="card-title">Name : <%= student.name %></h5>
-                                    <h6 class="card-text">Father : <%= student.fatherName %></h6>
-                                    <h6 class="card-text">Address : <%= student.address %></h6>
-                                    <h6 class="card-text">Phone : <%= student.contact %></h6>
-                                    <h6 class="card-text">Grade : <%= student.grade %></h6>
-                                    <h6 class="card-text">Gender : <%= student.gender %></h6>
-                                    <h6 class="card-text username">Username : <%= student.username %></h6>
-                                    <!-- <h6 class="card-text">Password : <%= student.password %></h6> -->
-                                    <h6 class="card-subtitle mb-2 text-body-secondary">Date-of-Birth :  <%= student.DOB.toISOString().split('T')[0] %></h6>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary">Admission date : <%= student.created_at.toISOString().split('T')[0] %></h6>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary">Update date : <%= student.updated_at ? student.updated_at.toISOString().split('T')[0] : "N/A" %></h6>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary">Admission End : <%= student.deleted_at ?  student.deleted_at.toISOString().split('T')[0] : "N/A" %></h6>
-                                    <small class="text-danger studentDeleted"><%= student.deleted_at ? "this student is no longer active" : "" %></small>
-                                    <div class="mt-3">
-                                        <div class="d-flex justify-content-center mb-2">
-                                            <button type="button" class="btn btn-secondary" onclick="resetPassword(<%= student.student_id %>)">Reset Password</button>
-                                        </div>
-                                        <div class="d-flex justify-content-center gap-2">
-                                            <button type="button" class="btn btn-danger" onclick="removestudent('<%= student.username %>')">Delete</button>
-                                            <button type="button" class="btn btn-warning" onclick="editstudent(<%= student.student_id %>)" data-bs-toggle="modal" data-bs-target="#edit-info">Edit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Students/Tables -->
+    <div class="container mt-5">
+    <% if (arr.length === 0) { %>
+        <p class="text-white text-center mt-5">start taking admissions<br>Zero students</p>
+    <% } else { %>
+        <div class="card">
+        <div class="card-body">
+            <div class="row mb-3 d-flex justify-content-between align-items-center">
+                <div class="col-md-4">
+                    <h4 class="card-title mb-0">Student List</h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input class="form-control purple-border" type="text" placeholder="Search students..." id="searchInput" aria-label="Search">
+                        <button class="btn btn-dark" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Father</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Grade</th>
+                    <th>Gender</th>
+                    <th>Username</th>
+                    <th>DOB</th>
+                    <th>Admission</th>
+                    <th>Updated</th>
+                    <th>Deleted</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% arr.forEach(function(student) { %>
+                    <% if(!(student.username === "admin" && student.password === "admin123")) { %>
+                    <tr class="<%= student.deleted_at ? 'table-danger' : '' %>">
+                        <td><%= student.name %></td>
+                        <td><%= student.fatherName %></td>
+                        <td><%= student.email %></td>
+                        <td><%= student.address %></td>
+                        <td><%= student.contact %></td>
+                        <td><%= student.grade %></td>
+                        <td><%= student.gender %></td>
+                        <td><%= student.username %></td>
+                        <td><%= student.DOB.toISOString().split('T')[0] %></td>
+                        <td><%= student.created_at.toISOString().split('T')[0] %></td>
+                        <td><%= student.updated_at ? student.updated_at.toISOString().split('T')[0] : 'N/A' %></td>
+                        <td><%= student.deleted_at ? student.deleted_at.toISOString().split('T')[0] : 'N/A' %></td>
+                        <td><%= student.deleted_at ? 'Inactive' : 'Active' %></td>
+                        <td>
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-secondary" onclick="resetPassword(<%= student.student_id %>)">Reset</button>
+                            <button class="btn btn-sm btn-warning" onclick="editstudent(<%= student.student_id %>)" data-bs-toggle="modal" data-bs-target="#edit-info">Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="removestudent('<%= student.username %>')">Delete</button>
                         </div>
+                        </td>
+                    </tr>
                     <% } %>
                 <% }); %>
-            <% } %>
+                </tbody>
+            </table>
+            </div>
         </div>
+        </div>
+    <% } %>
     </div>
-
-
 
     
     <script src="/js/admin.js"></script>
