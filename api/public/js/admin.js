@@ -69,10 +69,11 @@ function editstudent(id){
             } else if (student.gender === 'Female') {
                 $("#female1").prop("checked", true);
             }
+            // jo bhi datatype date k mySql me h wese hi show hota h lekin get krne me wo "toISOString" format me hi send krta h which is still a string, not a Date
         }
     })
     .catch(function(err) {
-        console.error("Prefill error:", err);
+        console.log("Prefill error:", err);
     });
 }
 function updateStudent(event)
@@ -173,6 +174,63 @@ function deleteAll()
     })
 }
 
+function search()
+{
+    let findBy = $("#searchInput").val() ;
+    axios({
+        method: 'GET',
+        url: 'http://localhost:11000/search',
+        params : {
+            findBy
+        }
+    }).then(function(res){
+        let student = res.data ;
+        let html = '' ;
+        student.forEach(function(student) {
+        html += `
+            <tr class="${student.deleted_at ? 'table-danger' : ''}">
+                <td class="py-1">
+                    <img src="${student.gender === 'Male'
+                        ? 'https://img.icons8.com/office/36/000000/guest-male.png'
+                        : 'https://img.icons8.com/office/36/000000/person-female.png'}" alt="image">
+                </td>
+                <td>${student.name}</td>
+                <td>${student.fatherName}</td>
+                <td>${student.email}</td>
+                <td>${student.address}</td>
+                <td>${student.contact}</td>
+                <td>${student.grade}</td>
+                <td>${student.gender}</td>
+                <td>${student.username}</td>
+                <td>${new Date(student.DOB).toISOString().split("T")[0]}</td>
+                <td>${new Date(student.created_at).toISOString().split("T")[0]}</td>
+                <td>${student.updated_at ? new Date(student.updated_at).toISOString().split("T")[0] : "N/A"}</td>
+                <td>${student.deleted_at ? new Date(student.deleted_at).toISOString().split("T")[0] : "N/A"}</td>
+                <td>${student.deleted_at ? "Inactive" : "Active"}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-secondary" onclick="resetPassword(${student.student_id})">Reset</button>
+                        <button class="btn btn-sm btn-warning" onclick="editstudent(${student.student_id})" data-bs-toggle="modal" data-bs-target="#edit-info">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="removestudent('${student.username}')">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+    $("#studentTableBody").empty();
+    $("#studentTableBody").append(html);
+    // $("#studentTableBody").html(html);
+    // jo bhi datatype date k mySql me h wese hi show hota h lekin get krne me wo "toISOString" format me hi send krta h which is still a string, not a Date
+    })
+    .catch(function(err){
+        console.log("Error while Searching :", err);
+        let html = `<tr>
+                    <td colspan="15" class="text-center text-muted">No student found</td>
+                </tr>`
+        $("#studentTableBody").html(html) ;
+    })
+}
+
 function sortedElements(student_array)
 {
     let html = '' ;
@@ -210,6 +268,7 @@ function sortedElements(student_array)
     $("#studentTableBody").empty();
     $("#studentTableBody").append(html);
     // $("#studentTableBody").html(html);
+    // jo bhi datatype date k mySql me h wese hi show hota h lekin get krne me wo "toISOString" format me hi send krta h which is still a string, not a Date
 }
 
 $("#byName").on("click", function(){
@@ -224,6 +283,9 @@ $("#byName").on("click", function(){
         })
         console.log(student_array) ;
         sortedElements(student_array) ;
+    })
+    .catch(function(err){
+        console.log("Error fetching byName sorted list:", err);
     })
 })
 
@@ -240,6 +302,9 @@ $("#byUsername").on("click", function(){
         console.log(student_array) ;
         sortedElements(student_array) ;
     })
+    .catch(function(err){
+        console.log("Error fetching byUsername sorted list:", err);
+    })
 })
 
 $("#byGrade").on("click", function(){
@@ -255,6 +320,9 @@ $("#byGrade").on("click", function(){
         console.log(student_array) ;
         sortedElements(student_array) ;
     })
+    .catch(function(err){
+        console.log("Error fetching byGrade sorted list:", err);
+    })
 })
 
 $("#byGender").on("click", function(){
@@ -269,6 +337,9 @@ $("#byGender").on("click", function(){
         })
         console.log(student_array) ;
         sortedElements(student_array) ;
+    })
+    .catch(function(err){
+        console.log("Error fetching byGender sorted list:", err);
     })
 })
 

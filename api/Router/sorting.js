@@ -9,7 +9,7 @@ Router.get('/', async function(req,res){
             res.status(200).send(students) ;
         else{
             throw{
-                message : "student array not found"
+                message : "students not found"
             }
         }
     }catch(err){
