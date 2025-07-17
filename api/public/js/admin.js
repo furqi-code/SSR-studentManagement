@@ -173,6 +173,105 @@ function deleteAll()
     })
 }
 
+function sortedElements(student_array)
+{
+    let html = '' ;
+    student_array.forEach(function(student) {
+        html += `
+            <tr class="${student.deleted_at ? 'table-danger' : ''}">
+                <td class="py-1">
+                    <img src="${student.gender === 'Male'
+                        ? 'https://img.icons8.com/office/36/000000/guest-male.png'
+                        : 'https://img.icons8.com/office/36/000000/person-female.png'}" alt="image">
+                </td>
+                <td>${student.name}</td>
+                <td>${student.fatherName}</td>
+                <td>${student.email}</td>
+                <td>${student.address}</td>
+                <td>${student.contact}</td>
+                <td>${student.grade}</td>
+                <td>${student.gender}</td>
+                <td>${student.username}</td>
+                <td>${new Date(student.DOB).toISOString().split("T")[0]}</td>
+                <td>${new Date(student.created_at).toISOString().split("T")[0]}</td>
+                <td>${student.updated_at ? new Date(student.updated_at).toISOString().split("T")[0] : "N/A"}</td>
+                <td>${student.deleted_at ? new Date(student.deleted_at).toISOString().split("T")[0] : "N/A"}</td>
+                <td>${student.deleted_at ? "Inactive" : "Active"}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm btn-secondary" onclick="resetPassword(${student.student_id})">Reset</button>
+                        <button class="btn btn-sm btn-warning" onclick="editstudent(${student.student_id})" data-bs-toggle="modal" data-bs-target="#edit-info">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="removestudent('${student.username}')">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+    $("#studentTableBody").empty();
+    $("#studentTableBody").append(html);
+    // $("#studentTableBody").html(html);
+}
+
+$("#byName").on("click", function(){
+    axios({
+        method : "GET",
+        url : "http://localhost:11000/sorting"
+    })
+    .then(function(res){
+        let student_array = res.data ;
+        student_array.sort(function(a,b){
+            return a.name.localeCompare(b.name) ;
+        })
+        console.log(student_array) ;
+        sortedElements(student_array) ;
+    })
+})
+
+$("#byUsername").on("click", function(){
+    axios({
+        method : "GET",
+        url : "http://localhost:11000/sorting"
+    })
+    .then(function(res){
+        let student_array = res.data ;
+        student_array.sort(function(a,b){
+            return a.username.localeCompare(b.username) ;
+        })
+        console.log(student_array) ;
+        sortedElements(student_array) ;
+    })
+})
+
+$("#byGrade").on("click", function(){
+    axios({
+        method : "GET",
+        url : "http://localhost:11000/sorting"
+    })
+    .then(function(res){
+        let student_array = res.data ;
+        student_array.sort(function(a,b){
+            return a.grade.localeCompare(b.grade) ;
+        })
+        console.log(student_array) ;
+        sortedElements(student_array) ;
+    })
+})
+
+$("#byGender").on("click", function(){
+    axios({
+        method : "GET",
+        url : "http://localhost:11000/sorting"
+    })
+    .then(function(res){
+        let student_array = res.data ;
+        student_array.sort(function(a,b){
+            return a.gender.localeCompare(b.gender) ;
+        })
+        console.log(student_array) ;
+        sortedElements(student_array) ;
+    })
+})
+
 function logout() 
 {
     axios({

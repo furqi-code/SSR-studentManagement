@@ -30,8 +30,9 @@ Router.patch("/", Auth_admin, async function(req,res){
             const password = name + '@' + passDob ;         
             // mySql me jo datatype h usme hi show krta h to password bhi isi format me dalna students but without hyphens
             console.log(password) ;
-            let update_pass = await executeQuery(`update student_details set password = ? where student_id = ?`,
-                [bcrypt.hashSync(password, SALTROUNDS), student_id]) ;
+            const updated_at = new Date().toISOString().split('Z')[0].replace('T', ' ') ;
+            let update_pass = await executeQuery(`update student_details set password = ?, updated_at=? where student_id = ?`,
+                [bcrypt.hashSync(password, SALTROUNDS), updated_at, student_id]) ;
             console.log(update_pass) ;
             res.status(200).send({
                 message : "Reset Password successfully"

@@ -23,6 +23,7 @@ const { studntSignin } = require('./Router/studnt-signin');
 const { student_LogoutRouter } = require('./Router/student-logout');
 const { updateMyself } = require('./Router/studnt-editStudnt');
 const { studentPrefill } = require('./Router/studentPrefill');
+const { sortRouter } = require('./Router/sorting');
 // const { login_count } = require('./Router/login-count');
 
 
@@ -51,6 +52,7 @@ app.use('/adminPrefill', adminPrefill) ;
 app.use('/resetPassword', resetPassword) ;
 app.use('/softDelete', softDelete) ;
 app.use('/clearStudents', clear_All) ;
+app.use('/sorting', sortRouter) ;
 // student
 app.use("/forgotPassword", forgetPassword);
 app.use('/studentPage', studentRouter) ;

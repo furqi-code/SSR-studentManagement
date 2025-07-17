@@ -19,8 +19,9 @@ Router.patch("/", async function(req,res){
             let dbUser = existing_student[0] ;
             let username = dbUser.username ;
             let student_id = dbUser.student_id ;
-            let update_pass = await executeQuery(`update student_details set is_active = ?, password = ? where student_id = ?`,
-                [true, bcrypt.hashSync(newPassword, SALTROUNDS), student_id]) ;
+            const updated_at = new Date().toISOString().split('Z')[0].replace('T', ' ') ;
+            let update_pass = await executeQuery(`update student_details set password = ?, is_active = ?, updated_at=? where student_id = ?`,
+                [bcrypt.hashSync(newPassword, SALTROUNDS), true, updated_at, student_id]) ;
             console.log(update_pass) ;
             // Update is_active to 1 or true in student_login table
             // await executeQuery(`update student_login set is_active = ? where Username = ?`, [1, username]) ;
