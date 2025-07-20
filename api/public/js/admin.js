@@ -285,7 +285,7 @@ $("#byName").on("click", function(){
         sortedElements(student_array) ;
     })
     .catch(function(err){
-        console.log("Error fetching byName sorted list:", err);
+        console.log("Error fetching byName sorted list: ", err);
     })
 })
 
@@ -303,7 +303,7 @@ $("#byUsername").on("click", function(){
         sortedElements(student_array) ;
     })
     .catch(function(err){
-        console.log("Error fetching byUsername sorted list:", err);
+        console.log("Error fetching byUsername sorted list: ", err);
     })
 })
 
@@ -321,7 +321,7 @@ $("#byGrade").on("click", function(){
         sortedElements(student_array) ;
     })
     .catch(function(err){
-        console.log("Error fetching byGrade sorted list:", err);
+        console.log("Error fetching byGrade sorted list: ", err);
     })
 })
 
@@ -339,7 +339,7 @@ $("#byGender").on("click", function(){
         sortedElements(student_array) ;
     })
     .catch(function(err){
-        console.log("Error fetching byGender sorted list:", err);
+        console.log("Error fetching byGender sorted list: ", err);
     })
 })
 
@@ -347,7 +347,7 @@ function logout()
 {
     axios({
         method:'POST',
-        url: 'http://localhost:11000/adminLogout'
+        url: 'http://localhost:11000/user-Logout'
     }).then(function(){
         window.open("/", "_parent") ;
     })

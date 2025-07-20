@@ -9,8 +9,6 @@ const { PORT } =  require('./constants') ;
 // Local Modules
 const { homeRouter } = require('./Router/homePage');
 const { adminRouter } = require('./Router/adminPage');
-const { adminSignin } = require('./Router/admin-signin');
-const { admin_LogoutRouter } = require('./Router/admin-logout');
 const { admission } = require('./Router/admission');
 const { studentUpdated } = require('./Router/admin-editStudnt');
 const { adminPrefill } = require('./Router/adminPrefill');
@@ -19,13 +17,12 @@ const resetPassword = require('./Router/resetPassword') ;
 const clear_All = require('./Router/clear-students') ;
 const forgetPassword = require("./Router/forgetPassword") ;
 const { studentRouter } = require('./Router/studntPage') ;
-const { studntSignin } = require('./Router/studnt-signin');
-const { student_LogoutRouter } = require('./Router/student-logout');
+const { loginRouter } = require('./Router/user-signin');
+const { logoutRouter } = require('./Router/user-logout');
 const { updateMyself } = require('./Router/studnt-editStudnt');
 const { studentPrefill } = require('./Router/studentPrefill');
 const { sortRouter } = require('./Router/sorting');
 const { searchRouter } = require('./Router/search');
-// const { login_count } = require('./Router/login-count');
 
 
 // Middlewares
@@ -43,9 +40,9 @@ app.use(
 
 // Route handler / middleware
 app.use('/', homeRouter) ;
+app.use('/user-signin', loginRouter) ;
+app.use('/user-Logout', logoutRouter) ;
 // admin
-app.use('/admin-signin', adminSignin) ;
-app.use('/adminLogout', admin_LogoutRouter) ;
 app.use('/adminPage', adminRouter) ;
 app.use('/addstudent', admission) ;
 app.use('/editstudent', studentUpdated) ;
@@ -58,11 +55,8 @@ app.use('/search', searchRouter) ;
 // student
 app.use("/forgotPassword", forgetPassword);
 app.use('/studentPage', studentRouter) ;
-app.use('/student-signin', studntSignin) ;
-app.use('/studntLogout', student_LogoutRouter) ;
 app.use('/editMyself', updateMyself) ;
 app.use('/studentPrefill', studentPrefill) ;
-// app.use('/signin-count', login_count) ;
 
 
 app.listen(PORT, function () {

@@ -1,9 +1,11 @@
 const express = require('express') ;
 const Router = express.Router() ;
+const { Auth_user } = require('../middleware');
 const { executeQuery } = require('../mySqldb/Query') ;
-const { Auth_admin } = require('../middleware') ;
 
-Router.patch('/', Auth_admin, async function(req,res){
+Router.use(Auth_user) ;
+
+Router.patch('/', async function(req,res){
     try{
         const { name, fatherName, email, address, phoneNumber, dob, grade, gender} = req.body ;
         const student_id = req.query.student_id ;

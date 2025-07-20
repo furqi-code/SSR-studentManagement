@@ -1,6 +1,9 @@
 const express = require("express") ;
 const Router = express.Router() ;
+const { Auth_user } = require('../middleware');
 const {executeQuery} = require("../mySqldb/Query") ;
+
+Router.use(Auth_user) ;
 
 Router.get('/', async function(req,res){
     try{
