@@ -26,6 +26,7 @@ const { studentPrefill } = require('./Router/studentPrefill');
 const { sortRouter } = require('./Router/sorting');
 const { searchRouter } = require('./Router/search');
 const {googlePassport} = require('./Router/google-passport');
+const {githubPassport} = require('./Router/github-passport');
 
 
 // Middlewares
@@ -61,6 +62,7 @@ app.use('/studentPage', studentRouter) ;
 app.use('/editMyself', updateMyself) ;
 app.use('/studentPrefill', studentPrefill) ;
 app.use('/login/google', googlePassport) ;
+app.use('/login/github', githubPassport) ;
 
 
 app.listen(PORT, function () {

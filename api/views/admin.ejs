@@ -397,6 +397,7 @@ p {
                     <th>Grade</th>
                     <th>Gender</th>
                     <th>Username</th>
+                    <th>Provider</th>
                     <th>DOB</th>
                     <th>Admission</th>
                     <th>Updated</th>
@@ -420,6 +421,7 @@ p {
                         <td><%= student.grade || "N/A" %></td>
                         <td><%= student.gender || "N/A" %></td>
                         <td><%= student.username || "N/A" %></td>
+                        <td><%= student.provider || "N/A" %></td>
                         <td><%= student.DOB ? student.DOB.toISOString().split('T')[0] : "N/A" %></td>
                         <td><%= student.created_at.toISOString().split('T')[0] %></td>
                         <td><%= student.updated_at ? student.updated_at.toISOString().split('T')[0] : 'N/A' %></td>
