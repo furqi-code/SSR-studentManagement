@@ -412,15 +412,15 @@ p {
                         <td class="py-1">
                             <img src="<%= student.gender === 'Male' ? 'https://img.icons8.com/office/36/000000/guest-male.png' : 'https://img.icons8.com/office/36/000000/person-female.png' %>" alt="image">
                         </td>
-                        <td><%= student.name %></td>
-                        <td><%= student.fatherName %></td>
-                        <td><%= student.email %></td>
-                        <td><%= student.address %></td>
-                        <td><%= student.contact %></td>
-                        <td><%= student.grade %></td>
-                        <td><%= student.gender %></td>
-                        <td><%= student.username %></td>
-                        <td><%= student.DOB.toISOString().split('T')[0] %></td>
+                        <td><%= student.name || "N/A" %></td>
+                        <td><%= student.fatherName || "N/A" %></td>
+                        <td><%= student.email || "N/A" %></td>
+                        <td><%= student.address || "N/A" %></td>
+                        <td><%= student.contact || "N/A" %></td>
+                        <td><%= student.grade || "N/A" %></td>
+                        <td><%= student.gender || "N/A" %></td>
+                        <td><%= student.username || "N/A" %></td>
+                        <td><%= student.DOB ? student.DOB.toISOString().split('T')[0] : "N/A" %></td>
                         <td><%= student.created_at.toISOString().split('T')[0] %></td>
                         <td><%= student.updated_at ? student.updated_at.toISOString().split('T')[0] : 'N/A' %></td>
                         <td><%= student.deleted_at ? student.deleted_at.toISOString().split('T')[0] : 'N/A' %></td>

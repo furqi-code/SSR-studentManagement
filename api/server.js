@@ -4,7 +4,9 @@ const bodyParser = require('body-parser') ;
 const cors = require('cors') ;
 const cookieParser = require('cookie-parser') ;
 const { PORT } =  require('./constants') ;
-  
+require('dotenv').config();
+// console.log(process.env) ;
+
 
 // Local Modules
 const { homeRouter } = require('./Router/homePage');
@@ -23,6 +25,7 @@ const { updateMyself } = require('./Router/studnt-editStudnt');
 const { studentPrefill } = require('./Router/studentPrefill');
 const { sortRouter } = require('./Router/sorting');
 const { searchRouter } = require('./Router/search');
+const {googlePassport} = require('./Router/google-passport');
 
 
 // Middlewares
@@ -53,10 +56,11 @@ app.use('/clearStudents', clear_All) ;
 app.use('/sorting', sortRouter) ;
 app.use('/search', searchRouter) ;
 // student
-app.use("/forgotPassword", forgetPassword);
+app.use('/forgotPassword', forgetPassword);
 app.use('/studentPage', studentRouter) ;
 app.use('/editMyself', updateMyself) ;
 app.use('/studentPrefill', studentPrefill) ;
+app.use('/login/google', googlePassport) ;
 
 
 app.listen(PORT, function () {

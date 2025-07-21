@@ -15,15 +15,15 @@ create table student_details (
     gender enum('M','F','Male','Female'),
     is_active BOOLEAN,
     is_admin BOOLEAN DEFAULT false,
+    provider varchar(100),
     created_at timestamp,
     updated_at timestamp,
     deleted_at timestamp
 );
 
-insert into student_details(username, password) values("admin", "admin123") ; 
-UPDATE student_details SET is_admin = true WHERE username = 'admin';
+insert into student_details(username, password, is_admin) values("admin", "admin123", true) ; 
 
-select * from student_details ;
+select * from student_details ;	
 drop table student_details ;
 
 

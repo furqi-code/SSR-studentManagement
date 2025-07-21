@@ -14,14 +14,14 @@ Router.post('/', async function(req,res){
         const password = name + '@' + passDob ; // mySql me jo datatype h usme hi show krta h to password bhi isi format me dalna students but without hyphens
         const encrypted = bcrypt.hashSync(password, SALTROUNDS) ;
         const created_at = new Date().toISOString().split('Z')[0].replace('T', ' ') ;   
-        const is_active = false ;
+        const is_active = false, provider = 'local' ;
         const existing_username = await executeQuery(`select * from student_details where username = ? AND email = ?`, [username, email]) ;
         if(existing_username.length > 0){
             res.status(400).send({ message: "student with this Username/Email already exists" }) ;
         }
         // insert student information here
-        let inserted_students = await executeQuery(`insert into student_details(name, fatherName, email, address, contact, dob, grade, username, password, gender, is_active, created_at)
-            values(?,?,?,?,?,?,?,?,?,?,?,?)`, [name, fatherName, email, address, phoneNumber, dob, grade, username, encrypted, gender, is_active, created_at]) ;
+        let inserted_students = await executeQuery(`insert into student_details(name, fatherName, email, address, contact, dob, grade, username, password, gender, is_active, provider, created_at)
+            values(?,?,?,?,?,?,?,?,?,?,?,?,?)`, [name, fatherName, email, address, phoneNumber, dob, grade, username, encrypted, gender, is_active, provider, created_at]) ;
         if(inserted_students.insertId > 0){   
             // const studentId = inserted_students.insertId ;
             // inserted_loginCnt = await executeQuery(`insert into student_login(student_id, username, is_active) values(?,?,?)`, [studentId, username, is_active]) ;

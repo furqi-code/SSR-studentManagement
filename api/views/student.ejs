@@ -135,15 +135,16 @@
                                 <div class="d-flex mb-2 justify-content-center align-items-center">
                                     <img src="/images/working.png" alt="" class="image-fluid object-cover" height="100px", width="100px">
                                 </div>
-                                <h5 class="card-title">Name : <%= student.name %></h5>
-                                <h6 class="card-text">Father : <%= student.fatherName %></h6>
-                                <h6 class="card-text">Address : <%= student.address %></h6>
-                                <h6 class="card-text">Phone : <%= student.contact %></h6>
-                                <h6 class="card-text">Grade : <%= student.grade %></h6>
-                                <h6 class="card-text">Gender : <%= student.gender %></h6>
-                                <h6 class="card-text">Username : <%= student.username %></h6>
+                                <h5 class="card-title">Name : <%= student.name || "N/A" %></h5>
+                                <h6 class="card-text">Father : <%= student.fatherName || "N/A" %></h6>
+                                <h6 class="card-title">Email : <%= student.email || "N/A" %></h6>
+                                <h6 class="card-text">Address : <%= student.address || "N/A" %></h6>
+                                <h6 class="card-text">Phone : <%= student.contact || "N/A" %></h6>
+                                <h6 class="card-text">Grade : <%= student.grade || "N/A" %></h6>
+                                <h6 class="card-text">Gender : <%= student.gender || "N/A" %></h6>
+                                <h6 class="card-text">Username : <%= student.username || "N/A" %></h6>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">Date-of-Birth :  <%= student.DOB ? student.DOB.toISOString().split('T')[0] : "N/A" %></h6>
                                 <!-- <h6 class="card-text">Password : <%= student.password %></h6> -->
-                                <h6 class="card-subtitle mb-2 text-body-secondary">Date-of-Birth :  <%= student.DOB.toISOString().split('T')[0] %></h6>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">Admission date : <%= student.created_at.toISOString().split('T')[0] %></h6>
                                 <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Update date : <%= student.updated_at ? student.updated_at.toISOString().split('T')[0] : "N/A" %></h6> -->
                                 <!-- <h6 class="card-subtitle mb-2 text-body-secondary">Admission End :  <%= student.deleted_at ?  student.deleted_at.toISOString().split('T')[0] : "N/A" %></h6> -->

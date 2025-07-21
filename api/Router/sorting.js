@@ -5,9 +5,10 @@ const {executeQuery} = require("../mySqldb/Query") ;
 
 Router.use(Auth_user) ;
 
+// sorting aren't working via third-party login users
 Router.get('/', async function(req,res){
     try{
-        let students = await executeQuery(`select * from student_details where username != 'admin' && password != 'admin123' `) ;
+        let students = await executeQuery(`select * from student_details where username != 'admin' && password != 'admin123' && is_admin != 1`) ;
         if(students.length > 0)
             res.status(200).send(students) ;
         else{

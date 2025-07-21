@@ -19,15 +19,24 @@ Router.patch("/", async function(req,res){
             let dbUser = existing_student[0] ;
             let username = dbUser.username ;
             let student_id = dbUser.student_id ;
-            const updated_at = new Date().toISOString().split('Z')[0].replace('T', ' ') ;
-            let update_pass = await executeQuery(`update student_details set password = ?, is_active = ?, updated_at=? where student_id = ?`,
+            let is_active = dbUser.is_active ;
+            if(is_active !== -1)    // not a local provider
+            {
+                const updated_at = new Date().toISOString().split('Z')[0].replace('T', ' ') ;
+                let update_pass = await executeQuery(`update student_details set password = ?, is_active = ?, updated_at=? where student_id = ?`,
                 [bcrypt.hashSync(newPassword, SALTROUNDS), true, updated_at, student_id]) ;
-            console.log(update_pass) ;
-            // Update is_active to 1 or true in student_login table
-            // await executeQuery(`update student_login set is_active = ? where Username = ?`, [1, username]) ;
-            res.status(200).send({
-                message : "Reset Password successfully"
-            })
+                console.log(update_pass) ;
+                // Update is_active to 1 or true in student_login table
+                // await executeQuery(`update student_login set is_active = ? where Username = ?`, [1, username]) ;
+                res.status(200).send({
+                    message : "Reset Password successfully"
+                })
+            }else{
+                res.status(403).send({
+                    message: "Password change is not available for third-party login users"
+                    // message: "Password change is not available for " + dbUser.provider + " login users"
+                })
+            }
             // if(update_pass.affectedRows > 0){
             // }else{
             //     res.status(404).send("Password cant be Reset") ;

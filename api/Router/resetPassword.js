@@ -22,6 +22,17 @@ Router.patch("/", async function(req,res){
             let name = dbUser.name ;
             let dob = dbUser.DOB ;
             let created_at = dbUser.created_at ;
+            let is_active = dbUser.is_active ;
+            if(!req.is_admin) {
+                return res.status(403).send("Only admins can reset passwords.");
+            }
+            if(is_active === -1)    // not a local provider
+            {
+                res.status(403).send({
+                    message: "Password change is not available for third-party login users"
+                    // message: "Password change is not available for " + dbUser.provider + " login users"
+                })   
+            }
             console.log("dob from mySql: ", dob) ;    
             console.log("admission date from mySql: ", created_at) ;  
             // dob me one month minus kyu arha h ? timezone ?? isliye resetPassword krne pe actuall dob use nhi horha
@@ -34,10 +45,10 @@ Router.patch("/", async function(req,res){
             const updated_at = new Date().toISOString().split('Z')[0].replace('T', ' ') ;
             let update_pass = await executeQuery(`update student_details set password = ?, updated_at=? where student_id = ?`,
                 [bcrypt.hashSync(password, SALTROUNDS), updated_at, student_id]) ;
-            console.log(update_pass) ;
-            res.status(200).send({
-                message : "Reset Password successfully"
-            })
+                console.log(update_pass) ;
+                res.status(200).send({
+                    message : "Reset Password successfully"
+                })
             // if(update_pass.affectedRows > 0){
             // }else{
             //     res.status(404).send("Password cant be Reset") ;
