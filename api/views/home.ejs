@@ -5,28 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Management</title>
     <%- include("shared/links"); %>
-    <link rel="stylesheet" href="">
-    <style>
-        body{
-            background-color: lightslategray ;
-        }
-        .navbar{
-            background-color: black;
-        }
-        nav{
-            height: 100px;
-            border-radius: 17px
-        }
-        .card{
-            border-radius: 12px;
-        }
-        .modal-body{
-            background-color: lightblue;
-        }
-        input{
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
     <!-- Header -->
@@ -90,12 +69,26 @@
                             <input type="password" class="form-control rounded-3" name="stud_pass" placeholder="Password" required />
                             <label>Password</label>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center  mb-3">
-                            <div>
-                                <a href="http://localhost:11000/login/google" class="me-2">Sign in with <img src="/images/google.png" alt="" height="30px" width="30px"></a>
-                                <a href="http://localhost:11000/login/github" class="me-2">Sign in with <img src="/images/github.png" alt="" height="30px" width="30px"></a>
+                        <div class="social-login-row">
+                            <div class="social-links">
+                                <a href="http://localhost:11000/login/google" class="social-btn btn-google">
+                                    <span>Sign in with</span>
+                                    <img src="/images/google.png" alt="Google" />
+                                </a>
+                                <a href="http://localhost:11000/login/github" class="social-btn btn-github">
+                                    <span>Sign in with</span>
+                                    <img src="/images/github.png" alt="GitHub" />
+                                </a>
+                                <a href="#" class="social-btn btn-twitter">
+                                    <span>Sign in with</span>
+                                    <img src="/images/twitter.png" alt="Twitter" />
+                                </a>
+                                <a href="#" class="social-btn btn-facebook">
+                                    <span>Sign in with</span>
+                                    <img src="/images/facebook.png" alt="Facebook" />
+                                </a>
                             </div>
-                            <input class="btn btn-link" type="button" value="Forgot Password?" data-bs-toggle="modal" data-bs-target="#forgotPassModal" placeholder="Forgot Password" />
+                            <input class="forgot-pass-btn" type="button" value="Forgot Password?" data-bs-toggle="modal" data-bs-target="#forgotPassModal" />
                         </div>
                         <button type="submit" class="btn btn-primary w-100 rounded-pill py-2" style="font-size: 16px;">
                             Sign In

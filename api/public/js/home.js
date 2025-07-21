@@ -24,7 +24,7 @@ function adminLogin(event)
 
     axios({
         method : "POST",
-        url : "http://localhost:11000/user-signin",
+        url : "http://localhost:11000/login",
         data : {
             username, 
             password 
@@ -65,7 +65,7 @@ function studlogin(event)
     // ab hm extra table nhi bnarhe login_count check krne k liye
     axios({
         method : "POST",
-        url : "http://localhost:11000/user-signin",
+        url : "http://localhost:11000/login",
         data : {
             username, 
             password 

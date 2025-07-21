@@ -25,9 +25,7 @@ const { updateMyself } = require('./Router/studnt-editStudnt');
 const { studentPrefill } = require('./Router/studentPrefill');
 const { sortRouter } = require('./Router/sorting');
 const { searchRouter } = require('./Router/search');
-const {googlePassport} = require('./Router/google-passport');
-const {githubPassport} = require('./Router/github-passport');
-
+const passport = require("./passport-config") ;
 
 // Middlewares
 app.set("view engine", "ejs");
@@ -40,12 +38,13 @@ app.use(
     cors({
     origin : "*" 
 }))
+app.use(passport.initialize()) ;
 
 
 // Route handler / middleware
 app.use('/', homeRouter) ;
-app.use('/user-signin', loginRouter) ;
-app.use('/user-Logout', logoutRouter) ;
+app.use('/login', loginRouter) ;
+app.use('/logout', logoutRouter) ;
 // admin
 app.use('/adminPage', adminRouter) ;
 app.use('/addstudent', admission) ;
@@ -61,8 +60,6 @@ app.use('/forgotPassword', forgetPassword);
 app.use('/studentPage', studentRouter) ;
 app.use('/editMyself', updateMyself) ;
 app.use('/studentPrefill', studentPrefill) ;
-app.use('/login/google', googlePassport) ;
-app.use('/login/github', githubPassport) ;
 
 
 app.listen(PORT, function () {

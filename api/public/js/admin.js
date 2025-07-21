@@ -347,7 +347,7 @@ function logout()
 {
     axios({
         method:'POST',
-        url: 'http://localhost:11000/user-Logout'
+        url: 'http://localhost:11000/logout'
     }).then(function(){
         window.open("/", "_parent") ;
     })
